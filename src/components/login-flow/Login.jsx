@@ -15,18 +15,14 @@ function Login() {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state?.userData?.allUserDataBase);
 
-  console.log("userList", userList);
-
   const checkCredentials = () => {
-    // Loop through the allUserDataBase array
     for (let i = 0; i < userList?.length; i++) {
       const user = userList[i];
-      // Check if the email and password match
       if (user.email === email && user.password === password) {
-        return true; // Combination exists
+        return true;
       }
     }
-    return false; // Combination doesn't exist
+    return false;
   };
 
   const toggleSignInSignUp = () => {

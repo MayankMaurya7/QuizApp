@@ -95,7 +95,6 @@ export const QuizForm = () => {
           <div key={id}>
             <Stack direction={"row"} alignItems={"center"}>
               <span style={{ marginRight: "10px" }}>{index + 1}.</span>
-              {console.log(optionValues[id]?.value)}
               <TextField
                 variant="outlined"
                 margin="normal"

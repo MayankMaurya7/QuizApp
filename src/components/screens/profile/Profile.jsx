@@ -6,10 +6,8 @@ import { useParams } from "react-router-dom";
 function Profile() {
   const userList = useSelector((state) => state?.userData?.allUserDataBase);
   const params = useParams();
-  console.log("params", params?.id);
   const currentUser = userList?.filter((item) => item?.email === params?.id);
 
-  console.log("currentUser", currentUser);
   return (
     <Stack
       direction="column"

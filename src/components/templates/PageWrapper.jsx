@@ -5,8 +5,6 @@ import NavBar from "../navbar/NavBar";
 function PageWrapper(props) {
   const { children } = props;
 
-  console.log({ children });
-
   return (
     <Stack direction="column">
       <NavBar />

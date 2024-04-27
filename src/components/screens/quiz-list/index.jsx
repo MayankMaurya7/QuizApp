@@ -8,7 +8,6 @@ export const QuizList = () => {
   const params = useParams();
   const currentUser = userList?.filter((item) => item?.email === params?.id);
   const questions = currentUser[0]?.quizList;
-  console.log("questions", questions);
   // const questions = useSelector((state) => state.quizData?.questions);
   const RenderQuizList = () => {
     return (
