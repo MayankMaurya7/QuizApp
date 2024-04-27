@@ -9,24 +9,42 @@ import {
 import { v4 as uuid } from "uuid";
 
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setQuiz } from "../../redux/slices/quizManagement";
+import { useParams } from "react-router-dom";
+import { setAllUserDataBase } from "../../redux/slices/userManagement";
 
 export const QuizForm = () => {
   const [options, setOptios] = useState([uuid(), uuid()]);
   const [question, setQuestion] = useState("");
   const [optionValues, setOptionValues] = useState({});
   const dispatch = useDispatch();
+  const userList = useSelector((state) => state?.userData?.allUserDataBase);
+  const params = useParams();
+
+  function updateUserQuizList(quizList) {
+    const updatedUserData = userList.map((user) => {
+      if (user.email === params?.id) {
+        return {
+          ...user,
+          quizList: [...user?.quizList, quizList],
+        };
+      }
+      return user;
+    });
+    return updatedUserData;
+  }
 
   const handleCreateQuestion = (event) => {
     event.preventDefault();
-    dispatch(
-      setQuiz({
-        question,
-        options: Object.values(optionValues),
-      })
-    );
+    const quiz = {
+      question,
+      options: Object.values(optionValues),
+    };
+    dispatch(setQuiz(quiz));
+    dispatch(setAllUserDataBase(updateUserQuizList(quiz)));
     alert("Question Created");
+
     setQuestion("");
     setOptionValues({});
   };

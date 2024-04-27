@@ -41,9 +41,11 @@ function Login() {
         email,
         password,
         id: uuid(),
+        quizList: [],
       };
       const updatedList = [...userList, currentUser];
       dispatch(setAllUserDataBase(updatedList));
+      setLogin(true);
     }
   };
   const onSubmit = () => {

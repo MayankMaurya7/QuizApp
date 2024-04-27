@@ -1,9 +1,33 @@
-import React from 'react'
+import { Stack, Typography } from "@mui/material";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 function Profile() {
+  const userList = useSelector((state) => state?.userData?.allUserDataBase);
+  const params = useParams();
+  console.log("params", params?.id);
+  const currentUser = userList?.filter((item) => item?.email === params?.id);
+
+  console.log("currentUser", currentUser);
   return (
-    <div>Profile</div>
-  )
+    <Stack
+      direction="column"
+      gap={2}
+      justifyContent="center"
+      padding="20px"
+      margin="auto"
+      sx={{
+        marginTop: "10%",
+        border: "1px solid black",
+        borderRadius: "4px",
+        width: "50%",
+      }}
+    >
+      <Typography>Email: {currentUser[0]?.email}</Typography>
+      <Typography>Password: {currentUser[0]?.password}</Typography>
+    </Stack>
+  );
 }
 
-export default Profile
+export default Profile;
