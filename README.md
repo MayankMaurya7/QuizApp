@@ -31,4 +31,5 @@ After Sign-in:
    c. User can delete options.
    d. Once user hits create the question will be added to the quiz list.
 5. Quiz list can be accecsed via the nav-bar where user can see the list of questions they have created. 
-   a. when user clicks on the correct answers they are marked green
+   a. when user clicks on the correct answers they are marked green.
+6. Users can see their previous data when they log in again.
