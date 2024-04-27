@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setQuiz } from "../../redux/slices/quizManagement";
 import { useParams } from "react-router-dom";
 import { setAllUserDataBase } from "../../redux/slices/userManagement";
+import { setLocalStorageData } from "../../utils";
 
 export const QuizForm = () => {
   const [options, setOptios] = useState([uuid(), uuid()]);
@@ -32,6 +33,7 @@ export const QuizForm = () => {
       }
       return user;
     });
+    setLocalStorageData("allUserData", updatedUserData);
     return updatedUserData;
   }
 

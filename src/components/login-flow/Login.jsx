@@ -2,7 +2,7 @@ import { Button, Link, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { isEmail } from "../utils";
+import { getLocalStorageData, isEmail, setLocalStorageData } from "../utils";
 import { useNavigate } from "react-router-dom";
 import { PATH_NAME } from "../configs/PathName";
 import { setAllUserDataBase } from "../redux/slices/userManagement";
@@ -39,8 +39,16 @@ function Login() {
         id: uuid(),
         quizList: [],
       };
-      const updatedList = [...userList, currentUser];
+      const allDataFromAPI = getLocalStorageData("allUserData");
+      let updatedList = [];
+      if (allDataFromAPI) {
+        // if local storage has data
+        updatedList = [...allDataFromAPI, currentUser];
+      } else {
+        updatedList = [...userList, currentUser];
+      }
       dispatch(setAllUserDataBase(updatedList));
+      setLocalStorageData("allUserData", updatedList);
       setLogin(true);
     }
   };
@@ -49,6 +57,12 @@ function Login() {
       const check = checkCredentials();
       if (check) {
         navigate(PATH_NAME.PROFILE.replace(":id", email));
+        const allDataFromAPI = getLocalStorageData("allUserData");
+        console.log("allDataFromAPI1", allDataFromAPI);
+        if (allDataFromAPI) {
+          console.log("allDataFromAPI", allDataFromAPI);
+          dispatch(setAllUserDataBase(allDataFromAPI));
+        }
       } else {
         alert("Wrong Credentials");
       }
