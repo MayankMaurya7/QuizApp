@@ -58,9 +58,7 @@ function Login() {
       if (check) {
         navigate(PATH_NAME.PROFILE.replace(":id", email));
         const allDataFromAPI = getLocalStorageData("allUserData");
-        console.log("allDataFromAPI1", allDataFromAPI);
         if (allDataFromAPI) {
-          console.log("allDataFromAPI", allDataFromAPI);
           dispatch(setAllUserDataBase(allDataFromAPI));
         }
       } else {
